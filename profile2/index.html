@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil - Leticia Vieira</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark:   '#740835',
+                            mid:    '#a33060',
+                            light:  '#bf5380',
+                            accent: '#be4a4a',
+                            deep:   '#6b0c0c',
+                        }
+                    },
+                    fontFamily: {
+                        display: ['"Playfair Display"', 'serif'],
+                        body:    ['"DM Sans"', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        card: '0 20px 60px rgba(116,8,53,0.25)',
+                        btn:  '0 4px 15px rgba(107,12,12,0.4)',
+                    },
+                    animation: {
+                        'fade-up': 'fadeUp 0.7s ease both',
+                    },
+                    keyframes: {
+                        fadeUp: {
+                            '0%':   { opacity: 0, transform: 'translateY(24px)' },
+                            '100%': { opacity: 1, transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        .avatar-ring {
+            background: conic-gradient(from 0deg, #740835, #bf5380, #740835);
+            animation: spin 4s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.25s; }
+        .delay-3 { animation-delay: 0.4s; }
+        .delay-4 { animation-delay: 0.55s; }
+    </style>
+</head>
+
+<body class="min-h-screen flex items-center justify-center font-body
+             bg-gradient-to-br from-brand-dark via-brand-mid to-brand-light p-6">
+
+    <div class="relative bg-white rounded-3xl shadow-card px-10 py-12 max-w-sm w-full text-center
+                animate-fade-up overflow-hidden">
+
+        <div class="absolute top-0 right-0 w-28 h-28 bg-gradient-to-br from-brand-light/20 to-brand-dark/10
+                    rounded-bl-full pointer-events-none"></div>
+
+        <div class="relative inline-flex items-center justify-center mb-6 animate-fade-up delay-1">
+            <div class="avatar-ring absolute w-40 h-40 rounded-full"></div>
+            <div class="relative w-36 h-36 rounded-full overflow-hidden border-4 border-white shadow-md">
+                <img
+                    src="./Leticia.jpeg"
+                    alt="Foto de Leticia Vieira"
+                    class="w-full h-full object-cover"
+                    onerror="this.src='https://ui-avatars.com/api/?name=Leticia+Vieira&background=740835&color=fff&size=150'"
+                >
+            </div>
+        </div>
+
+        <h1 class="font-display text-3xl font-bold text-brand-accent mb-1 animate-fade-up delay-2">
+            Leticia Vieira
+        </h1>
+
+        <span class="inline-block bg-brand-dark/10 text-brand-dark text-sm font-medium
+                     px-4 py-1 rounded-full mb-6 animate-fade-up delay-2">
+            Software Developer
+        </span>
+
+        <div class="animate-fade-up delay-3">
+            <button
+                class="w-full bg-gradient-to-r from-brand-deep to-brand-dark text-white
+                       font-medium text-base py-3 rounded-2xl shadow-btn
+                       hover:opacity-90 hover:scale-[1.02] transition-all duration-200 mb-6">
+                Contact
+            </button>
+        </div>
+
+        <hr class="border-brand-light/30 mb-6 animate-fade-up delay-3">
+
+
+        <div class="flex flex-col gap-3 animate-fade-up delay-4">
+
+            <a href="mailto:letvng23@gmail.com"
+               class="flex items-center gap-3 px-4 py-3 rounded-xl border border-brand-light/30
+                      hover:bg-brand-dark/5 hover:border-brand-dark/40 transition-all duration-200
+                      text-brand-deep font-medium text-sm group">
+
+                <svg class="w-5 h-5 text-brand-accent group-hover:scale-110 transition-transform" fill="none"
+                     viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                          d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                </svg>
+                E-mail
+            </a>
+
+            <a href="https://www.linkedin.com/in/letciavieira/" target="_blank" rel="noopener"
+               class="flex items-center gap-3 px-4 py-3 rounded-xl border border-brand-light/30
+                      hover:bg-brand-dark/5 hover:border-brand-dark/40 transition-all duration-200
+                      text-brand-deep font-medium text-sm group">
+                      
+                <svg class="w-5 h-5 text-brand-accent group-hover:scale-110 transition-transform" fill="currentColor"
+                     viewBox="0 0 24 24">
+                    <path d="M20.447 20.452H17.21v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853
+                             0-2.136 1.445-2.136 2.939v5.667H9.988V9h3.102v1.561h.044
+                             c.432-.82 1.487-1.685 3.057-1.685 3.268 0 3.871 2.15 3.871
+                             4.947v6.629zM5.337 7.433a1.8 1.8 0 110-3.6 1.8 1.8 0 010
+                             3.6zM6.962 20.452H3.71V9h3.252v11.452zM22.225 0H1.771C.792 0
+                             0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2
+                             24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+                LinkedIn
+            </a>
+
+            <a href="https://github.com/LeticiaVieirg" target="_blank" rel="noopener"
+               class="flex items-center gap-3 px-4 py-3 rounded-xl border border-brand-light/30
+                      hover:bg-brand-dark/5 hover:border-brand-dark/40 transition-all duration-200
+                      text-brand-deep font-medium text-sm group">
+
+                <svg class="w-5 h-5 text-brand-accent group-hover:scale-110 transition-transform" fill="currentColor"
+                     viewBox="0 0 24 24">
+                    <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207
+                             11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729
+                             1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304
+                             3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931
+                             0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176
+                             0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005
+                             2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653
+                             1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221
+                             0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222
+                             v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+                </svg>
+                GitHub
+            </a>
+        </div>
+
+        <div class="absolute bottom-0 left-0 w-20 h-20 bg-gradient-to-tr from-brand-light/20 to-transparent
+                    rounded-tr-full pointer-events-none"></div>
+    </div>
+
+</body>
+</html>
