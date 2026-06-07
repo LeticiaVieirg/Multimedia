@@ -11,28 +11,51 @@ import {
   FaStepForward
 } from "react-icons/fa";
 
-import musics from "./data/Musics";mul
+import videos from "./data/Video";
 
 export default function Home() {
 
   const [playing, setPlaying] =useState<boolean>(false);
   const [volume, setVolume]=useState<number>(1);
-  const audioRef=useRef<HTMLAudioElement>(null);
-  const [audioIndex, setAudioIndex]=useState<number>(0);
+  const videoRef=useRef<HTMLVideoElement>(null);
+  const [videoIndex, setVideoIndex]=useState<number>(0);
   const [currentTime, setCurrentTime]=useState<number>(0);
   const [duration, setDuration]=useState<number>(0);
   const [velocity, setvelocity]=useState<number>(1);
+  const [filter, setFilter]=useState("normal");
+
+  const getFilterClass = () => {
+    switch (filter) {
+      case "gray":
+        return "grayscale";
+  
+      case "red":
+        return "sepia hue-rotate-[300deg] saturate-[5]";
+  
+      case "green":
+        return "sepia hue-rotate-[50deg] saturate-[5]";
+  
+      case "blue":
+        return "sepia hue-rotate-[180deg] saturate-[5]";
+  
+      case "bw":
+        return "grayscale contrast-150";
+  
+      default:
+        return "";
+    }
+  };
 
   const play=()=>{
-    const audio=audioRef.current;
-    if(!audio) return;
-    audio.play().catch((err)=>console.log(err));
+    const video=videoRef.current;
+    if(!video) return;
+    video.play().catch((err)=>console.log(err));
   }
 
   const pause=()=>{
-    const audio=audioRef.current;
-    if(!audio) return;
-    audio.pause();
+    const video=videoRef.current;
+    if(!video) return;
+    video.pause();
   }
 
   const playPause=()=>{
@@ -45,24 +68,24 @@ export default function Home() {
   }
 
   const configCurrentTime=(time:number)=> {
-    const audio = audioRef.current;
-    if(!audio) return;
-    audio.currentTime=time;
+    const video = videoRef.current;
+    if(!video) return;
+    video.currentTime=time;
     setCurrentTime(time);
   }
 
   const configVolume=(value:number)=> {
-    const audio=audioRef.current; 
-    if(!audio) return;
-    audio.volume=value;
+    const video=videoRef.current; 
+    if(!video) return;
+    video.volume=value;
     setVolume(value);
   }
 
   //Controle do primeiro audio, para ser executada
   useEffect(() => {
-    configAudio(0);
+    configVideo(0);
   
-    const audio = audioRef.current;
+    const audio = videoRef.current;
   
     if (!audio) return;
   
@@ -78,7 +101,7 @@ export default function Home() {
   }
 
   useEffect(() => {
-    const audio = audioRef.current;
+    const audio = videoRef.current;
   
     if (!audio) return;
   
@@ -93,21 +116,21 @@ export default function Home() {
     };
   
     audio.onended = () => {
-      configAudio(audioIndex + 1);
+      configVideo(videoIndex + 1);
     };
   
     if (playing) {
       audio.play().catch((err) => console.log(err));
     }
-  }, [audioIndex, playing]);
+  }, [videoIndex, playing]);
 
-  const configAudio=(index: number) => {
-    if(index>=musics.length){
+  const configVideo=(index: number) => {
+    if(index>=videos.length){
       index=0;
     }else if(index<0){
-      index=musics.length-1
+      index=videos.length-1
     }
-    setAudioIndex(index);
+    setVideoIndex(index);
   }
 
   const configVelocity=(number:number)=>{
@@ -115,9 +138,9 @@ export default function Home() {
     if(newVelocity>3){
       newVelocity=1;
     }
-    const audio=audioRef.current;
-    if(!audio)return;
-    audio.playbackRate=newVelocity;
+    const video=videoRef.current;
+    if(!video)return;
+    video.playbackRate=newVelocity;
     setvelocity(newVelocity);
   }
 
@@ -125,11 +148,11 @@ export default function Home() {
     <div className="  flex bg-black w-125 mr-auto ml-auto">
       <div>
         <ul>{
-          musics.map((music, index)=>{
+          videos.map((video, index)=>{
             return(
-              <li key={index} onClick={() => configAudio(index)} className="w-50">
-                <h1>{music.nome}</h1>
-                  <img src ={musics[index].imagem} alt= {"Imagem da musica" + music.nome} />
+              <li key={index} onClick={() => configVideo(index)} className="w-50">
+                <h1>{video.nome}</h1>
+                  <img src ={videos[index].thumb} alt= {`Thumbnail do video ${video.nome}`} />
               </li>
             )
           })
@@ -137,7 +160,7 @@ export default function Home() {
       </ul>
     </div>
     <div className="items-center flex flex-col w-50 m-0 mr-auto ml-auto">
-      <audio ref={audioRef} src={musics[audioIndex].url} controls hidden></audio>
+      <video ref={videoRef} src={videos[videoIndex].url} className={`w-[500px] rounded-lg ${getFilterClass()}`}></video>
       <button onClick={()=> playPause()}>
         {
             playing ? <FaPauseCircle/> : <FaPlayCircle/>
@@ -173,22 +196,65 @@ export default function Home() {
           </button>
         </div>
         <div>
-          <button onClick={()=> configAudio(audioIndex - 1)} className="mr-4">
+          <button onClick={()=> configVideo(videoIndex - 1)} className="mr-4">
                 <FaStepBackward />
           </button>
 
-          <button onClick={() => configAudio(audioIndex + 1)}>
+          <button onClick={() => configVideo(videoIndex + 1)}>
             <FaStepForward />
           </button>
 
           <button onClick={() => configVelocity(velocity + 0.5)} className="bg-blue-500 rounded-[360px] w-6">
             {velocity}
           </button>
-        </div>
+              </div>
+              <div className="flex gap-2 mt-4 flex-wrap">
+        <button
+          onClick={() => setFilter("normal")}
+          className="bg-gray-500 px-2 py-1 rounded"
+        >
+          Normal
+        </button>
+
+        <button
+          onClick={() => setFilter("gray")}
+          className="bg-gray-700 px-2 py-1 rounded"
+        >
+          Cinza
+        </button>
+
+        <button
+          onClick={() => setFilter("red")}
+          className="bg-red-500 px-2 py-1 rounded"
+        >
+          Vermelho
+        </button>
+
+        <button
+          onClick={() => setFilter("green")}
+          className="bg-green-500 px-2 py-1 rounded"
+        >
+          Verde
+        </button>
+
+        <button
+          onClick={() => setFilter("blue")}
+          className="bg-blue-500 px-2 py-1 rounded"
+        >
+          Azul
+        </button>
+
+        <button
+          onClick={() => setFilter("bw")}
+          className="bg-black border px-2 py-1 rounded"
+        >
+          P&B
+        </button>
+      </div>
         <div>
           <div className="w-50">
-                  <h1>{musics[audioIndex].nome}</h1>
-                  <img src={musics[audioIndex].imagem} alt={"Imagem da música " + musics[audioIndex].nome} />
+                  <h1>{videos[videoIndex].nome}</h1>
+                  <img src={videos[videoIndex].imagem} alt={"Imagem da música " + videos[videoIndex].nome} />
                 </div>
         </div>
       </div>
